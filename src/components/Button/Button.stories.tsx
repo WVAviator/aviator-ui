@@ -9,10 +9,12 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+const Template: Story<ButtonProps> = args => <Button {...args} />;
 
 export const Filled = Template.bind({});
 export const Outlined = Template.bind({});
+export const Ghost = Template.bind({});
 
 Filled.args = { variant: "filled", children: "Button" };
 Outlined.args = { variant: "outlined", children: "Button" };
+Ghost.args = { variant: "ghost", children: "Button" };

@@ -1,4 +1,4 @@
-import { Theme } from "../types";
+import { Theme } from "./themeTypes";
 import ThemeContext from "./ThemeContext";
 import { light } from "./themes";
 
