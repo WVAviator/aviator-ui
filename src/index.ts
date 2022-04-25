@@ -1,2 +1,2 @@
 export * from "./components";
-export * from "./asdf/a";
+export * from "./theme";
