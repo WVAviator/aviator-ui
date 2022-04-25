@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useContext, useMemo } from "react";
-import { ThemeContext } from "../../Theme";
+import { ThemeContext } from "../../asdf/a";
 import { CompoundStyle } from "../../types";
-import { ColorScheme, Palette } from "../../Theme/themeTypes";
+import { ColorScheme, Palette } from "../../asdf/themeTypes";
 
 const baseStyle = css`
 	border: none;
