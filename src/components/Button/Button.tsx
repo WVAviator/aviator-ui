@@ -2,8 +2,9 @@
 import { css } from "@emotion/react";
 import { useContext, useMemo } from "react";
 import { ThemeContext } from "../../theme";
-import { CompoundStyle } from "../../types";
-import { ColorScheme, Palette } from "../../theme/themeTypes";
+import { ColorScheme, Palette, Theme } from "../../theme/themeTypes";
+
+export type ButtonVariants = "filled" | "outlined" | "ghost";
 
 const baseStyle = css`
 	border: none;
@@ -17,8 +18,57 @@ const baseStyle = css`
 	box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
 `;
 
+const getVariantStyle = (
+	variant: ButtonVariants,
+	palette: Palette,
+	color: keyof Palette
+) => {
+	return {
+		filled: css`
+			border: 2px solid ${palette[color].medium};
+			background-color: ${palette[color].medium};
+			color: ${palette.text.medium};
+			&:hover {
+				background-color: ${palette[color].dark};
+				box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
+			}
+			&:active {
+				box-shadow: 0px 0.2px 1px 1px rgba(0, 0, 0, 0.1);
+				transform: scale(95%);
+			}
+		`,
+		outlined: css`
+			border: 2px solid ${palette[color].medium};
+			background-color: transparent;
+			color: ${palette[color].medium};
+			&:hover {
+				background-color: ${palette[color].medium};
+				color: ${palette.text.medium};
+				box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
+			}
+			&:active {
+				box-shadow: 0px 0.2px 1px 1px rgba(0, 0, 0, 0.1);
+				transform: scale(95%);
+			}
+		`,
+		ghost: css`
+			border: transparent;
+			background-color: transparent;
+			box-shadow: none;
+			color: ${palette[color].medium};
+			&:hover {
+				background-color: ${palette[color].medium}60;
+				color: ${palette.text.medium};
+			}
+			&:active {
+				transform: scale(95%);
+			}
+		`,
+	}[variant];
+};
+
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-	variant?: "filled" | "outlined" | "ghost";
+	variant?: ButtonVariants;
 	palette?: keyof ColorScheme;
 	color?: keyof Palette;
 }
@@ -29,58 +79,14 @@ const Button: React.FC<ButtonProps> = ({
 	color = "primary",
 	...rest
 }) => {
-	const theme = useContext(ThemeContext);
-	const chosenPalette = useMemo(() => {
-		return theme.colors[palette];
-	}, [theme, palette]);
+	const theme: Theme = useContext(ThemeContext);
 
-	const variantStyle: CompoundStyle = useMemo(
-		() => ({
-			filled: css`
-				border: 2px solid ${chosenPalette[color].medium};
-				background-color: ${chosenPalette[color].medium};
-				color: ${chosenPalette.text.medium};
-				&:hover {
-					background-color: ${chosenPalette[color].dark};
-					box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
-				}
-				&:active {
-					box-shadow: 0px 0.2px 1px 1px rgba(0, 0, 0, 0.1);
-					transform: scale(95%);
-				}
-			`,
-			outlined: css`
-				border: 2px solid ${chosenPalette[color].medium};
-				background-color: transparent;
-				color: ${chosenPalette[color].medium};
-				&:hover {
-					background-color: ${chosenPalette[color].medium};
-					color: ${chosenPalette.text.medium};
-					box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
-				}
-				&:active {
-					box-shadow: 0px 0.2px 1px 1px rgba(0, 0, 0, 0.1);
-					transform: scale(95%);
-				}
-			`,
-			ghost: css`
-				border: transparent;
-				background-color: transparent;
-				box-shadow: none;
-				color: ${chosenPalette[color].medium};
-				&:hover {
-					background-color: ${chosenPalette[color].medium}60;
-					color: ${chosenPalette.text.medium};
-				}
-				&:active {
-					transform: scale(95%);
-				}
-			`,
-		}),
+	const variantStyle = useMemo(
+		() => getVariantStyle(variant, theme.colors[palette], color),
 		[theme, variant, palette, color]
 	);
 
-	return <button css={[baseStyle, variantStyle[variant]]} {...rest} />;
+	return <button css={[baseStyle, variantStyle]} {...rest} />;
 };
 
 export default Button;
