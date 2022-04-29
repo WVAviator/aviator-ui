@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useContext, useMemo } from "react";
-import { ThemeContext } from "../../theme";
+import { useMemo } from "react";
 import { ColorScheme, Palette, Theme } from "../../theme/themeTypes";
 import useTheme from "../../theme/useTheme";
 
