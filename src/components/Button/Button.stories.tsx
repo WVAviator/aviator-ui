@@ -1,4 +1,5 @@
 import { Meta, Story } from "@storybook/react";
+import React from "react";
 import Button, { ButtonProps } from "./Button";
 
 const meta: Meta = {
@@ -16,5 +17,5 @@ export const Outlined = Template.bind({});
 export const Ghost = Template.bind({});
 
 Filled.args = { variant: "filled", children: "Button" };
-Outlined.args = { variant: "outlined", children: "Button" };
-Ghost.args = { variant: "ghost", children: "Button" };
+Outlined.args = { variant: "outlined", children: "Button", color: "secondary" };
+Ghost.args = { variant: "ghost", children: "Button", color: "tertiary" };

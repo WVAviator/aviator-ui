@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 import { useMemo } from "react";
-import { ColorScheme, Palette, Theme } from "../../theme/themeTypes";
-import useTheme from "../../theme/useTheme";
+import { highestTextContrast, shadeColor } from "../../color";
+import useAviatorTheme from "../../theme/useAviatorTheme";
 
 export type ButtonVariants = "filled" | "outlined" | "ghost";
 
@@ -20,16 +20,20 @@ const baseStyle = css`
 
 const getVariantStyle = (
 	variant: ButtonVariants,
-	palette: Palette,
-	color: keyof Palette
+	color: string,
+	{ colors }: Theme
 ) => {
 	return {
 		filled: css`
-			border: 2px solid ${palette[color].medium};
-			background-color: ${palette[color].medium};
-			color: ${palette.text.medium};
+			border: 2px solid ${color};
+			background-color: ${color};
+			color: ${highestTextContrast(
+				color,
+				colors.textLight,
+				colors.textDark
+			)};
 			&:hover {
-				background-color: ${palette[color].dark};
+				background-color: ${shadeColor(color, -20)};
 				box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
 			}
 			&:active {
@@ -38,12 +42,16 @@ const getVariantStyle = (
 			}
 		`,
 		outlined: css`
-			border: 2px solid ${palette[color].medium};
+			border: 2px solid ${color};
 			background-color: transparent;
-			color: ${palette[color].medium};
+			color: ${color};
 			&:hover {
-				background-color: ${palette[color].medium};
-				color: ${palette.text.medium};
+				background-color: ${color};
+				color: ${highestTextContrast(
+					color,
+					colors.textLight,
+					colors.textDark
+				)};
 				box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
 			}
 			&:active {
@@ -52,13 +60,17 @@ const getVariantStyle = (
 			}
 		`,
 		ghost: css`
-			border: transparent;
+			border: 2px solid transparent;
 			background-color: transparent;
 			box-shadow: none;
-			color: ${palette[color].medium};
+			color: ${color};
 			&:hover {
-				background-color: ${palette[color].medium}60;
-				color: ${palette.text.medium};
+				background-color: ${color}60;
+				color: ${highestTextContrast(
+					color,
+					colors.textLight,
+					colors.textDark
+				)};
 			}
 			&:active {
 				transform: scale(95%);
@@ -69,21 +81,19 @@ const getVariantStyle = (
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 	variant?: ButtonVariants;
-	palette?: keyof ColorScheme;
-	color?: keyof Palette;
+	color?: keyof Theme["colors"];
 }
 
 const Button: React.FC<ButtonProps> = ({
 	variant = "filled",
-	palette = "accent",
 	color = "primary",
 	...rest
 }) => {
-	const theme: Theme = useTheme();
+	const theme = useAviatorTheme();
 
 	const variantStyle = useMemo(
-		() => getVariantStyle(variant, theme.colors[palette], color),
-		[theme, variant, palette, color]
+		() => getVariantStyle(variant, theme.colors[color], theme),
+		[theme, variant, color]
 	);
 
 	return <button css={[baseStyle, variantStyle]} {...rest} />;
