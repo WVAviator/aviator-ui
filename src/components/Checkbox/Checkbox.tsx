@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
+import React from "react";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import useAviatorTheme from "../../theme/useAviatorTheme";
