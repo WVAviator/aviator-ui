@@ -1,4 +1,4 @@
-import { ThemeProvider, light, dark } from "../src/Theme";
+import { ThemeProvider, light, dark } from "../src/theme";
 // https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters
 export const parameters = {
 	// https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args
@@ -6,7 +6,7 @@ export const parameters = {
 };
 
 export const decorators = [
-	(Story) => (
+	Story => (
 		<ThemeProvider theme={light}>
 			<Story />
 		</ThemeProvider>
