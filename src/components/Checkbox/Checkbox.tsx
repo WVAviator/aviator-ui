@@ -2,6 +2,8 @@
 import { css } from "@emotion/react";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import useTheme from "../../theme/useTheme";
+import { Palette } from "../../theme/themeTypes";
 
 const labelStyle = css`
 	display: flex;
@@ -31,6 +33,7 @@ export interface CheckboxProps {
 	defaultChecked?: boolean;
 	checked?: boolean;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void | null;
+	color?: keyof Palette;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -38,6 +41,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 	defaultChecked = false,
 	checked = false,
 	onChange = null,
+	color = null,
 }) => {
 	const uuid = useRef(uuidv4());
 
@@ -47,6 +51,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
 		setChecked(event.target.checked);
 		onChange && onChange(event);
 	}, []);
+
+	const { colors } = useTheme();
 
 	return (
 		<div>
@@ -64,7 +70,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
 					<svg viewBox="0 0 12 12" fill="none">
 						<path
 							d="M2.0625 6.28977L4.28664 9.1875L10.125 2.8125"
-							stroke="black"
+							stroke={
+								color
+									? colors.foreground[color].medium
+									: colors.background.text.medium
+							}
 							stroke-width="0.75"
 							css={[
 								{
@@ -79,7 +89,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
 							width="11.25"
 							height="11.25"
 							rx="1.125"
-							stroke="black"
+							stroke={
+								color
+									? colors.foreground[color].medium
+									: colors.background.text.medium
+							}
 							stroke-width="0.75"
 						/>
 					</svg>

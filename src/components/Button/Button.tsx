@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useContext, useMemo } from "react";
 import { ThemeContext } from "../../theme";
 import { ColorScheme, Palette, Theme } from "../../theme/themeTypes";
+import useTheme from "../../theme/useTheme";
 
 export type ButtonVariants = "filled" | "outlined" | "ghost";
 
@@ -79,7 +80,7 @@ const Button: React.FC<ButtonProps> = ({
 	color = "primary",
 	...rest
 }) => {
-	const theme: Theme = useContext(ThemeContext);
+	const theme: Theme = useTheme();
 
 	const variantStyle = useMemo(
 		() => getVariantStyle(variant, theme.colors[palette], color),
