@@ -1,4 +1,5 @@
 import { Meta, Story } from "@storybook/react";
+import React from "react";
 import Checkbox, { CheckboxProps } from "./Checkbox";
 
 const meta: Meta = {
@@ -11,8 +12,20 @@ export default meta;
 
 const Template: Story<CheckboxProps> = args => <Checkbox {...args} />;
 
-export const Checked = Template.bind({});
-export const Unchecked = Template.bind({});
+export const Default = Template.bind({});
 
-Checked.args = { defaultChecked: true, label: "Checked" };
-Unchecked.args = { defaultChecked: false, label: "Unchecked" };
+Default.args = { defaultChecked: true, label: "Checkbox" };
+
+export const Controlled = () => {
+	const [checked, setChecked] = React.useState(false);
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setChecked(event.target.checked);
+	};
+	return (
+		<Checkbox
+			label={`This box is ${checked ? "checked" : "unchecked"}`}
+			checked={checked}
+			onChange={handleChange}
+		/>
+	);
+};
