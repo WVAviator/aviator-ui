@@ -105,13 +105,13 @@ const useMenuIconStyles = (
 	};
 };
 
-const MenuIcon = ({
+const MenuIcon: React.FC<MenuIconProps> = ({
 	open = false,
 	setOpen,
 	animationOptions,
 	color = "primary",
 	size = 30,
-}: MenuIconProps) => {
+}) => {
 	const [internalOpen, setInternalOpen] = useState(open);
 
 	const appliedAnimationOptions = useMemo(() => {
