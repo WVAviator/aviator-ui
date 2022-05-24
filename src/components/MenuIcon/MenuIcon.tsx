@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useAviatorTheme } from "../../theme";
 
 export interface MenuIconProps {

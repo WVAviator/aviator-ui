@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { highestTextContrast, shadeColor } from "../../color";
 import useAviatorTheme from "../../theme/useAviatorTheme";
 
