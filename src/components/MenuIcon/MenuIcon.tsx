@@ -27,9 +27,10 @@ const useMenuIconStyles = (
 
 	const { animated, easingFunction, duration } = animationOptions;
 
-	const splitDuration = useMemo(() => (animated ? duration * 0.5 : 0), [
-		duration,
-	]);
+	const splitDuration = useMemo(
+		() => (animated ? duration * 0.5 : 0),
+		[duration]
+	);
 	const remSize = useMemo(() => size / 16, [size]);
 
 	const commonStyles = useMemo(() => {
@@ -127,12 +128,8 @@ const MenuIcon: React.FC<MenuIconProps> = ({
 		};
 	}, [animationOptions]);
 
-	const {
-		topStyles,
-		bottomStyles,
-		midStyles,
-		buttonStyles,
-	} = useMenuIconStyles(internalOpen, appliedAnimationOptions, color, size);
+	const { topStyles, bottomStyles, midStyles, buttonStyles } =
+		useMenuIconStyles(internalOpen, appliedAnimationOptions, color, size);
 
 	const handleClick = (toOpen: boolean) => {
 		setInternalOpen(toOpen);
