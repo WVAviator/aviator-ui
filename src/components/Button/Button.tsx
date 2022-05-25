@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
 import React, { useMemo } from "react";
-import { highestTextContrast, shadeColor } from "../../color";
+import { highestTextContrast, shadeColor } from "../../utils/color";
 import useTheme from "../../theme/useTheme";
 
 export type ButtonVariants = "filled" | "outlined" | "ghost";
