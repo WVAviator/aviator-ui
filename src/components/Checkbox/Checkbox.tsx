@@ -3,7 +3,7 @@ import { css, Theme } from "@emotion/react";
 import React from "react";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import useAviatorTheme from "../../theme/useAviatorTheme";
+import useTheme from "../../theme/useTheme";
 
 const labelStyle = css`
 	display: flex;
@@ -52,7 +52,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 		onChange && onChange(event);
 	}, []);
 
-	const { colors } = useAviatorTheme();
+	const { colors } = useTheme();
 
 	return (
 		<div>
