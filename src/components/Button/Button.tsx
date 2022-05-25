@@ -2,7 +2,7 @@
 import { css, Theme } from "@emotion/react";
 import React, { useMemo } from "react";
 import { highestTextContrast, shadeColor } from "../../color";
-import useAviatorTheme from "../../theme/useAviatorTheme";
+import useTheme from "../../theme/useTheme";
 
 export type ButtonVariants = "filled" | "outlined" | "ghost";
 
@@ -33,7 +33,7 @@ const getVariantStyle = (
 				colors.textDark
 			)};
 			&:hover {
-				background-color: ${shadeColor(color, -20)};
+				background-color: ${shadeColor(color, -0.2)};
 				box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
 			}
 			&:active {
@@ -89,7 +89,7 @@ const Button: React.FC<ButtonProps> = ({
 	color = "primary",
 	...rest
 }) => {
-	const theme = useAviatorTheme();
+	const theme = useTheme();
 
 	const variantStyle = useMemo(
 		() => getVariantStyle(variant, theme.colors[color], theme),

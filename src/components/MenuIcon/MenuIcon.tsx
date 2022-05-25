@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
 import React, { useMemo, useState } from "react";
-import { useAviatorTheme } from "../../theme";
+import { useTheme } from "../../theme";
 
 export interface MenuIconProps {
 	open?: boolean;
@@ -23,7 +23,7 @@ const useMenuIconStyles = (
 	color: keyof Theme["colors"],
 	size: number
 ) => {
-	const theme = useAviatorTheme();
+	const theme = useTheme();
 
 	const { animated, easingFunction, duration } = animationOptions;
 

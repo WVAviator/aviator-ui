@@ -1,5 +1,1 @@
-import { SerializedStyles } from "@emotion/react";
-
-export interface CompoundStyle {
-	[key: string]: SerializedStyles;
-}
+export { RecursivePartial } from "./utils/deepMerge";

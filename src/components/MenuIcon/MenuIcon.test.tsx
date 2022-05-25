@@ -3,41 +3,43 @@ import MenuIcon from "./MenuIcon";
 import React, { useState } from "react";
 import "@testing-library/jest-dom";
 
-it("should render on the screen", () => {
-	render(<MenuIcon />);
-	const menuIcon = screen.getByRole("button");
-	expect(menuIcon).toBeInTheDocument();
-});
+describe("MenuIcon component", () => {
+	it("should render on the screen", () => {
+		render(<MenuIcon />);
+		const menuIcon = screen.getByRole("button");
+		expect(menuIcon).toBeInTheDocument();
+	});
 
-it("should allow controlled state and can show/hide a menu", () => {
-	const Wrapper = () => {
-		const [open, setOpen] = useState(false);
+	it("should allow controlled state and can show/hide a menu", () => {
+		const Wrapper = () => {
+			const [open, setOpen] = useState(false);
 
-		return (
-			<div>
-				<MenuIcon open={open} setOpen={setOpen} />
-				<div id="menu" style={{ display: open ? "block" : "none" }}>
-					Mobile Menu
+			return (
+				<div>
+					<MenuIcon open={open} setOpen={setOpen} />
+					<div id="menu" style={{ display: open ? "block" : "none" }}>
+						Mobile Menu
+					</div>
 				</div>
-			</div>
-		);
-	};
+			);
+		};
 
-	render(<Wrapper />);
-	const menu = screen.getByText("Mobile Menu");
-	const menuIcon = screen.getByRole("button");
+		render(<Wrapper />);
+		const menu = screen.getByText("Mobile Menu");
+		const menuIcon = screen.getByRole("button");
 
-	expect(menu).not.toBeVisible();
+		expect(menu).not.toBeVisible();
 
-	act(() => {
-		menuIcon.click();
+		act(() => {
+			menuIcon.click();
+		});
+
+		expect(menu).toBeVisible();
+
+		act(() => {
+			menuIcon.click();
+		});
+
+		expect(menu).not.toBeVisible();
 	});
-
-	expect(menu).toBeVisible();
-
-	act(() => {
-		menuIcon.click();
-	});
-
-	expect(menu).not.toBeVisible();
 });

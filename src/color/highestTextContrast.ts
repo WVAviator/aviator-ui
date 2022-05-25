@@ -1,3 +1,10 @@
+/**
+ * Determines which color will provide the highest contrast on the given background.
+ * @param bgColor The background color in hex format.
+ * @param lightColor The lighter of the two colors to compare.
+ * @param darkColor The darker of the two colors to compare.
+ * @returns Either lightColor or darkColor, whichever provides the highest contrast on the given background.
+ */
 const highestTextContrast = (
 	bgColor: string,
 	lightColor: string,
