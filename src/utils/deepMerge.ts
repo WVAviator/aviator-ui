@@ -10,7 +10,7 @@ export default function deepMerge<T>(
 
 	const output = Object.assign({}, target) as T;
 
-	(Object.keys(partial) as (keyof typeof partial)[]).forEach(key => {
+	(Object.keys(partial) as (keyof typeof partial)[]).forEach((key) => {
 		output[key] = deepMerge(output[key], partial[key]);
 	});
 

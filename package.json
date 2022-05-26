@@ -15,17 +15,19 @@
 		"build": "tsdx build",
 		"test": "tsdx test --passWithNoTests",
 		"lint": "eslint src/**/*[.ts,.tsx]",
-		"prepare": "tsdx build",
+		"prepare": "husky install && tsdx build",
 		"size": "size-limit",
 		"analyze": "size-limit --why",
 		"storybook": "start-storybook -p 6006",
-		"build-storybook": "build-storybook"
+		"build-storybook": "build-storybook",
+		"format": "prettier --write src/**/*[.ts,.tsx]"
 	},
 	"lint-staged": {
 		"src/**/*.{ts,tsx}": [
 			"eslint --fix",
 			"prettier --write",
-			"tsc --noEmit --composite false"
+			"tsdx build",
+			"tsdx test --passWithNoTests"
 		]
 	},
 	"peerDependencies": {
@@ -44,8 +46,7 @@
 		"useTabs": true,
 		"trailingComma": "es5",
 		"bracketSpacing": true,
-		"semi": true,
-		"formatOnSave": true
+		"semi": true
 	},
 	"name": "aviator-ui",
 	"author": "WVAviator",

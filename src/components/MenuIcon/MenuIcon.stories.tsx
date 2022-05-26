@@ -10,7 +10,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<MenuIconProps> = args => <MenuIcon {...args} />;
+const Template: Story<MenuIconProps> = (args) => <MenuIcon {...args} />;
 
 export const Default = Template.bind({});
 export const CustomizedAnimation = Template.bind({});
