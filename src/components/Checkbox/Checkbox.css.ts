@@ -31,10 +31,17 @@ const useCheckboxStyles = () => {
 		`;
 	}, []);
 
+	const internalHtmlStyle = useMemo(() => {
+		return css`
+			display: none;
+		`;
+	}, []);
+
 	return {
 		labelStyle,
 		svgWrapperStyle,
 		checkStyle,
+		internalHtmlStyle,
 	};
 };
 

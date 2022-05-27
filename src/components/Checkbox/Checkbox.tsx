@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, Theme } from "@emotion/react";
+import { Theme } from "@emotion/react";
 import React from "react";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 import { randomBytes } from "crypto";
@@ -31,7 +31,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
 	}, []);
 
 	const { colors } = useTheme();
-	const { labelStyle, svgWrapperStyle, checkStyle } = useCheckboxStyles();
+	const { labelStyle, svgWrapperStyle, checkStyle, internalHtmlStyle } =
+		useCheckboxStyles();
 
 	return (
 		<div>
@@ -40,9 +41,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 				type="checkbox"
 				checked={internalChecked}
 				onChange={handleChange}
-				css={css`
-					display: none;
-				`}
+				css={internalHtmlStyle}
 			/>
 			<label css={labelStyle} htmlFor={uuid.current}>
 				<div css={svgWrapperStyle} className="svgWrapper">
