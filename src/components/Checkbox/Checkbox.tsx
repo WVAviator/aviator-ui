@@ -2,31 +2,9 @@
 import { css, Theme } from "@emotion/react";
 import React from "react";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { randomBytes } from "crypto";
 import useTheme from "../../theme/useTheme";
-
-const labelStyle = css`
-	display: flex;
-	align-items: center;
-	gap: 1em;
-	cursor: pointer;
-	&:hover > .svgWrapper {
-		transform: scale(1.05);
-	}
-	&:active > .svgWrapper {
-		transform: scale(0.95);
-	}
-`;
-
-const svgWrapperStyle = css`
-	width: 1.1em;
-	height: 1.1em;
-	transition: all 0.1s ease-in-out;
-`;
-
-const checkStyle = css`
-	transition: all 0.1s ease-in-out;
-`;
+import useCheckboxStyles from "./Checkbox.css";
 
 export interface CheckboxProps {
 	label?: string;
@@ -43,7 +21,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 	onChange = null,
 	color = null,
 }) => {
-	const uuid = useRef(uuidv4());
+	const uuid = useRef(randomBytes(4).toString("hex"));
 
 	const [internalChecked, setChecked] = useState(defaultChecked || checked);
 
@@ -53,6 +31,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 	}, []);
 
 	const { colors } = useTheme();
+	const { labelStyle, svgWrapperStyle, checkStyle } = useCheckboxStyles();
 
 	return (
 		<div>

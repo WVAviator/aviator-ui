@@ -93,8 +93,7 @@
 	"dependencies": {
 		"@babel/preset-react": "^7.17.12",
 		"@emotion/babel-preset-css-prop": "^11.2.0",
-		"@emotion/react": "^11.9.0",
-		"uuid": "^8.3.2"
+		"@emotion/react": "^11.9.0"
 	},
 	"repository": {
 		"type": "git",
