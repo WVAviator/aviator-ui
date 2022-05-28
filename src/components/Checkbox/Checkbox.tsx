@@ -2,8 +2,8 @@
 import { Theme } from "@emotion/react";
 import React from "react";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
-import { randomBytes } from "crypto";
 import useTheme from "../../theme/useTheme";
+import randomId from "../../utils/randomId";
 import useCheckboxStyles from "./Checkbox.css";
 
 export interface CheckboxProps {
@@ -21,7 +21,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 	onChange = null,
 	color = null,
 }) => {
-	const uuid = useRef(randomBytes(4).toString("hex"));
+	const uuid = useRef(randomId());
 
 	const [internalChecked, setChecked] = useState(defaultChecked || checked);
 
