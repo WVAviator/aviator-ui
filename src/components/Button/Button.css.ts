@@ -14,13 +14,17 @@ const useButtonStyles = (
 		return css`
 			border: none;
 			box-sizing: border-box;
-			padding: 0.6em 1.2em;
+			padding: 0.6em 1em;
 			border-radius: 0.25rem;
 			font-size: 1rem;
 			font-weight: bold;
 			cursor: pointer;
 			transition: all 0.2s ease-in-out;
 			box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 0.5em;
 		`;
 	}, []);
 
@@ -81,7 +85,14 @@ const useButtonStyles = (
 		}[variant];
 	}, [variant, color, colors]);
 
-	return { buttonStyles: [baseStyle, variantStyle] };
+	const iconStyles = useMemo(() => {
+		return css`
+			width: 1.35em;
+			height: 1.35em;
+		`;
+	}, []);
+
+	return { buttonStyles: [baseStyle, variantStyle], iconStyles };
 };
 
 export default useButtonStyles;

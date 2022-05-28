@@ -30,4 +30,16 @@ describe("Button component", () => {
 
 		expect(button).toHaveTextContent("14");
 	});
+
+	it("renders an end icon", () => {
+		render(<Button endIcon={<div>O</div>}>Button</Button>);
+		const button = screen.getByRole("button");
+		expect(button).toContainElement(screen.getByText("O"));
+	});
+
+	it("renders a start icon", () => {
+		render(<Button startIcon={<span>O</span>}>Button</Button>);
+		const button = screen.getByRole("button");
+		expect(button).toContainElement(screen.getByText("O"));
+	});
 });
