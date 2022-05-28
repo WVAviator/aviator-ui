@@ -10,6 +10,13 @@
 	"engines": {
 		"node": ">=10"
 	},
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"tsConfig": "tsconfig.test.json"
+			}
+		}
+	},
 	"scripts": {
 		"start": "tsdx watch",
 		"build": "tsdx build",
