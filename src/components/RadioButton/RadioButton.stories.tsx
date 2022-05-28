@@ -10,11 +10,11 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<RadioButtonProps> = args => <RadioButton {...args} />;
+const Template: Story<RadioButtonProps> = (args) => <RadioButton {...args} />;
 
 export const Default = Template.bind({});
 
-Default.args = { defaultChecked: true, label: "Radio Button" };
+Default.args = { checked: false, label: "Radio Button" };
 
 export const Controlled = () => {
 	const [checked, setChecked] = React.useState(false);
