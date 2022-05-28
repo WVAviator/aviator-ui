@@ -10,10 +10,17 @@
 	"engines": {
 		"node": ">=10"
 	},
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"tsConfig": "tsconfig.test.json"
+			}
+		}
+	},
 	"scripts": {
 		"start": "tsdx watch",
 		"build": "tsdx build",
-		"test": "tsdx test --passWithNoTests",
+		"test": "tsdx test",
 		"lint": "eslint src/**/*[.ts,.tsx]",
 		"prepare": "husky install && tsdx build",
 		"size": "size-limit",
@@ -27,7 +34,7 @@
 			"eslint --fix",
 			"prettier --write",
 			"tsdx build",
-			"tsdx test --passWithNoTests"
+			"tsdx test --bail"
 		]
 	},
 	"peerDependencies": {
@@ -54,11 +61,11 @@
 	"size-limit": [
 		{
 			"path": "dist/aviator-ui.cjs.production.min.js",
-			"limit": "10 KB"
+			"limit": "150 KB"
 		},
 		{
 			"path": "dist/aviator-ui.esm.js",
-			"limit": "10 KB"
+			"limit": "100 KB"
 		}
 	],
 	"devDependencies": {
@@ -72,7 +79,6 @@
 		"@testing-library/react": "^13.1.1",
 		"@types/react": "^17.0.43",
 		"@types/react-dom": "^17.0.14",
-		"@types/uuid": "^8.3.4",
 		"@typescript-eslint/eslint-plugin": "^5.18.0",
 		"@typescript-eslint/parser": "^5.18.0",
 		"babel-loader": "^8.2.4",
@@ -92,7 +98,6 @@
 	},
 	"dependencies": {
 		"@babel/preset-react": "^7.17.12",
-		"@emotion/babel-preset-css-prop": "^11.2.0",
 		"@emotion/react": "^11.9.0"
 	},
 	"repository": {
