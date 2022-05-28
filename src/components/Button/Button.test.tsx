@@ -3,29 +3,43 @@ import Button from "./Button";
 import React, { useState } from "react";
 import "@testing-library/jest-dom";
 
-it("should render on the screen", () => {
-	render(<Button>Button</Button>);
-	const button = screen.getByRole("button");
-	expect(button).toBeInTheDocument();
-});
+describe("Button component", () => {
+	it("should render on the screen", () => {
+		render(<Button>Button</Button>);
+		const button = screen.getByRole("button");
+		expect(button).toBeInTheDocument();
+	});
 
-it("should allow controlled state and text updates", () => {
-	const Wrapper = () => {
-		const [count, setCount] = useState(0);
-		const handleClick = () => {
-			setCount(count + 1);
+	it("should allow controlled state and text updates", () => {
+		const Wrapper = () => {
+			const [count, setCount] = useState(0);
+			const handleClick = () => {
+				setCount(count + 1);
+			};
+			return <Button onClick={handleClick}>{count}</Button>;
 		};
-		return <Button onClick={handleClick}>{count}</Button>;
-	};
 
-	render(<Wrapper />);
-	const button = screen.getByRole("button");
+		render(<Wrapper />);
+		const button = screen.getByRole("button");
 
-	for (let i = 0; i < 14; i++) {
-		act(() => {
-			button.click();
-		});
-	}
+		for (let i = 0; i < 14; i++) {
+			act(() => {
+				button.click();
+			});
+		}
 
-	expect(button).toHaveTextContent("14");
+		expect(button).toHaveTextContent("14");
+	});
+
+	it("renders an end icon", () => {
+		render(<Button endIcon={<div>O</div>}>Button</Button>);
+		const button = screen.getByRole("button");
+		expect(button).toContainElement(screen.getByText("O"));
+	});
+
+	it("renders a start icon", () => {
+		render(<Button startIcon={<span>O</span>}>Button</Button>);
+		const button = screen.getByRole("button");
+		expect(button).toContainElement(screen.getByText("O"));
+	});
 });

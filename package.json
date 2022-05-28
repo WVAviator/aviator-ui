@@ -1,5 +1,5 @@
 {
-	"version": "0.1.0",
+	"version": "0.1.8",
 	"license": "MIT",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
@@ -10,22 +10,31 @@
 	"engines": {
 		"node": ">=10"
 	},
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"tsConfig": "tsconfig.test.json"
+			}
+		}
+	},
 	"scripts": {
 		"start": "tsdx watch",
 		"build": "tsdx build",
-		"test": "tsdx test --passWithNoTests",
+		"test": "tsdx test",
 		"lint": "eslint src/**/*[.ts,.tsx]",
-		"prepare": "tsdx build",
+		"prepare": "husky install && tsdx build",
 		"size": "size-limit",
 		"analyze": "size-limit --why",
 		"storybook": "start-storybook -p 6006",
-		"build-storybook": "build-storybook"
+		"build-storybook": "build-storybook",
+		"format": "prettier --write src/**/*[.ts,.tsx]"
 	},
 	"lint-staged": {
 		"src/**/*.{ts,tsx}": [
 			"eslint --fix",
 			"prettier --write",
-			"tsc --noEmit --composite false"
+			"tsdx build",
+			"tsdx test --bail"
 		]
 	},
 	"peerDependencies": {
@@ -44,8 +53,7 @@
 		"useTabs": true,
 		"trailingComma": "es5",
 		"bracketSpacing": true,
-		"semi": true,
-		"formatOnSave": true
+		"semi": true
 	},
 	"name": "aviator-ui",
 	"author": "WVAviator",
@@ -53,15 +61,15 @@
 	"size-limit": [
 		{
 			"path": "dist/aviator-ui.cjs.production.min.js",
-			"limit": "10 KB"
+			"limit": "150 KB"
 		},
 		{
 			"path": "dist/aviator-ui.esm.js",
-			"limit": "10 KB"
+			"limit": "100 KB"
 		}
 	],
 	"devDependencies": {
-		"@babel/core": "^7.17.9",
+		"@heroicons/react": "^1.0.6",
 		"@size-limit/preset-small-lib": "^7.0.8",
 		"@storybook/addon-essentials": "^6.4.20",
 		"@storybook/addon-info": "^5.3.21",
@@ -72,7 +80,6 @@
 		"@testing-library/react": "^13.1.1",
 		"@types/react": "^17.0.43",
 		"@types/react-dom": "^17.0.14",
-		"@types/uuid": "^8.3.4",
 		"@typescript-eslint/eslint-plugin": "^5.18.0",
 		"@typescript-eslint/parser": "^5.18.0",
 		"babel-loader": "^8.2.4",
@@ -91,8 +98,8 @@
 		"typescript": "^4.6.3"
 	},
 	"dependencies": {
-		"@emotion/react": "^11.9.0",
-		"uuid": "^8.3.2"
+		"@babel/preset-react": "^7.17.12",
+		"@emotion/react": "^11.9.0"
 	},
 	"repository": {
 		"type": "git",

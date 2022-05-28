@@ -1,3 +1,10 @@
+/**
+ * Determines which color will provide the highest contrast on the given background.
+ * @param bgColor The background color in hex format.
+ * @param lightColor The lighter of the two colors to compare.
+ * @param darkColor The darker of the two colors to compare.
+ * @returns Either lightColor or darkColor, whichever provides the highest contrast on the given background.
+ */
 const highestTextContrast = (
 	bgColor: string,
 	lightColor: string,
@@ -8,7 +15,7 @@ const highestTextContrast = (
 	const g = parseInt(color.substring(2, 4), 16); // hexToG
 	const b = parseInt(color.substring(4, 6), 16); // hexToB
 	const uicolors = [r / 255, g / 255, b / 255];
-	const c = uicolors.map(col => {
+	const c = uicolors.map((col) => {
 		if (col <= 0.03928) {
 			return col / 12.92;
 		}

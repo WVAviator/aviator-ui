@@ -23,7 +23,7 @@
 		"moduleResolution": "node",
 		// transpile JSX to React.createElement
 
-		"jsx": "preserve", // DO NOT CHANGE - "preserve" is required for Emotion CSS to work
+		"jsx": "react", // DO NOT CHANGE - "preserve" is required for Emotion CSS to work
 
 		// interop between ESM and CJS modules. Recommended by TS
 		"esModuleInterop": true,
