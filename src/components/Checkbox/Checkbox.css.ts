@@ -36,6 +36,12 @@ const useCheckboxStyles = (internalChecked: boolean) => {
 	const internalHtmlStyle = useMemo(() => {
 		return css`
 			appearance: none;
+			&:focus + label > span {
+				outline-style: solid;
+				outline-width: 1px;
+				outline-color: #a1a1a1;
+				outline-offset: 1px;
+			}
 		`;
 	}, []);
 

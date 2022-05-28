@@ -20,7 +20,7 @@
 	"scripts": {
 		"start": "tsdx watch",
 		"build": "tsdx build",
-		"test": "tsdx test",
+		"test": "tsdx test --passWithNoTests",
 		"lint": "eslint src/**/*[.ts,.tsx]",
 		"prepare": "husky install && tsdx build",
 		"size": "size-limit",
@@ -34,7 +34,7 @@
 			"eslint --fix",
 			"prettier --write",
 			"tsdx build",
-			"tsdx test --bail"
+			"tsdx test --bail --passWithNoTests"
 		]
 	},
 	"peerDependencies": {
