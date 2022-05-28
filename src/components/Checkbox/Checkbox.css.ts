@@ -1,17 +1,18 @@
 import { css } from "@emotion/react";
 import { useMemo } from "react";
 
-const useCheckboxStyles = () => {
+const useCheckboxStyles = (internalChecked: boolean) => {
 	const labelStyle = useMemo(() => {
 		return css`
 			display: flex;
 			align-items: center;
 			gap: 1em;
+			user-select: none;
 			cursor: pointer;
-			&:hover > .svgWrapper {
+			&:hover > span {
 				transform: scale(1.05);
 			}
-			&:active > .svgWrapper {
+			&:active > span {
 				transform: scale(0.95);
 			}
 		`;
@@ -28,12 +29,19 @@ const useCheckboxStyles = () => {
 	const checkStyle = useMemo(() => {
 		return css`
 			transition: all 0.1s ease-in-out;
+			opacity: ${internalChecked ? 1 : 0};
 		`;
-	}, []);
+	}, [internalChecked]);
 
 	const internalHtmlStyle = useMemo(() => {
 		return css`
-			display: none;
+			appearance: none;
+			&:focus + label > span {
+				outline-style: solid;
+				outline-width: 1px;
+				outline-color: #a1a1a1;
+				outline-offset: 1px;
+			}
 		`;
 	}, []);
 

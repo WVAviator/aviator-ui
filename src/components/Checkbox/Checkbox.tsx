@@ -6,9 +6,8 @@ import useTheme from "../../theme/useTheme";
 import randomId from "../../utils/randomId";
 import useCheckboxStyles from "./Checkbox.css";
 
-export interface CheckboxProps {
+export interface CheckboxProps extends React.HTMLAttributes<HTMLInputElement> {
 	label?: string;
-	defaultChecked?: boolean;
 	checked?: boolean;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void | null;
 	color?: keyof Theme["colors"];
@@ -16,14 +15,14 @@ export interface CheckboxProps {
 
 const Checkbox: React.FC<CheckboxProps> = ({
 	label = "",
-	defaultChecked = false,
 	checked = false,
 	onChange = null,
 	color = null,
 }) => {
-	const uuid = useRef(randomId());
+	const labelId = useRef(randomId());
+	const htmlId = useRef(randomId());
 
-	const [internalChecked, setChecked] = useState(defaultChecked || checked);
+	const [internalChecked, setChecked] = useState(checked);
 
 	const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		setChecked(event.target.checked);
@@ -32,30 +31,34 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
 	const { colors } = useTheme();
 	const { labelStyle, svgWrapperStyle, checkStyle, internalHtmlStyle } =
-		useCheckboxStyles();
+		useCheckboxStyles(internalChecked);
 
 	return (
 		<div>
 			<input
-				id={uuid.current}
 				type="checkbox"
+				id={htmlId.current}
+				css={internalHtmlStyle}
 				checked={internalChecked}
 				onChange={handleChange}
-				css={internalHtmlStyle}
+				role="checkbox"
+				aria-checked={internalChecked}
+				aria-labelledby={labelId.current}
+				tabIndex={0}
 			/>
-			<label css={labelStyle} htmlFor={uuid.current}>
-				<div css={svgWrapperStyle} className="svgWrapper">
+
+			<label
+				css={labelStyle}
+				id={labelId.current}
+				htmlFor={htmlId.current}
+			>
+				<span css={svgWrapperStyle}>
 					<svg viewBox="0 0 12 12" fill="none">
 						<path
 							d="M2.0625 6.28977L4.28664 9.1875L10.125 2.8125"
 							stroke={color ? colors[color] : "black"}
-							stroke-width="0.75"
-							css={[
-								{
-									opacity: internalChecked ? 1 : 0,
-								},
-								checkStyle,
-							]}
+							strokeWidth="0.75"
+							css={checkStyle}
 						/>
 						<rect
 							x="0.375"
@@ -64,11 +67,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
 							height="11.25"
 							rx="1.125"
 							stroke={color ? colors[color] : "black"}
-							stroke-width="0.75"
+							strokeWidth="0.75"
 						/>
 					</svg>
-				</div>
-				{label && <span>{label}</span>}
+				</span>
+				{label}
 			</label>
 		</div>
 	);
