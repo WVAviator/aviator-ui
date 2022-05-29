@@ -13,3 +13,23 @@ This project makes heavy use of the following technologies:
 - Storybook
 - Emotion
 
+To get started, first install the library:
+```
+npm install aviator-ui
+```
+or, if you're using Yarn:
+```
+yarn add aviator-ui
+```
+and from there you can start using AviatorUI components in your project. Currently, only the following components are available:
+
+- Button
+- Checkbox
+- RadioButton
+- MenuIcon
+- Spinner
+
+More components will be added as development continues.
+
+If you would like to customize the theme, you can wrap your application in the `ThemeProvider` element and give it a `theme` prop. If you prefer not to define every single property of the theme object, you can use the `createTheme` function with a partial theme as an argument, and it will be merged with the default theme.
+
