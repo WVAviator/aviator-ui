@@ -1,0 +1,17 @@
+{
+	"name": "aviator-cli",
+	"version": "0.0.1",
+	"description": "A CLI tool for scaffolding UI components in AviatorUI",
+	"main": "bin/index.js",
+	"bin": {
+		"aviator": "./bin/index.js"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "WVAviator",
+	"license": "ISC",
+	"dependencies": {
+		"yargs": "^17.5.1"
+	}
+}
