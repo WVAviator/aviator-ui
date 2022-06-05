@@ -16,7 +16,7 @@ describe("MenuIcon component", () => {
 
 			return (
 				<div>
-					<MenuIcon open={open} setOpen={setOpen} />
+					<MenuIcon open={open} onChange={setOpen} />
 					<div id="menu" style={{ display: open ? "block" : "none" }}>
 						Mobile Menu
 					</div>
