@@ -2,6 +2,11 @@
 export const parameters = {
 	// https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args
 	actions: { argTypesRegex: "^on.*" },
+	options: {
+		storySort: {
+			order: ["Introduction", "Components"],
+		},
+	},
 };
 
 export const decorators = [Story => <Story />];
