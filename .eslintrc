@@ -7,5 +7,15 @@
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended"
 	],
-	"ignorePatterns": ["cli"]
+	"ignorePatterns": ["cli"],
+	"settings": {
+		"mdx/code-blocks": true,
+		"mdx/language-mapper": false
+	},
+	"overrides": [
+		{
+			"files": "*.mdx",
+			"extends": "plugin:mdx/recommended"
+		}
+	]
 }

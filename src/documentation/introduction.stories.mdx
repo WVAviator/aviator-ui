@@ -26,13 +26,13 @@ styles. If you want to customize those styles, you can simply use the className
 prop on the components, just as you would for any other React component, and
 your styles will override the defaults.
 
-```
+```javascript
 <>
     <Button>Default Styles</Button>
     <Button className="custom-btn">Custom Styles</Button>
 </>
 ```
-```
+```css
 .custom-btn {
     background-color: #f00;
     color: #fff;
@@ -52,7 +52,7 @@ If you want to apply styling across all components, you can use the included
 Theme and ThemeProvider. Define your own custom Theme using the included
 createTheme() function...
 
-```
+```javascript
 const theme = createTheme({
         colors: {
             primary: '#00ff99',
@@ -64,7 +64,7 @@ const theme = createTheme({
 
 ...and pass the result to a ThemeProvider component that wraps your app.
 
-```
+```javascript
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
