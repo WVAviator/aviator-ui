@@ -8,12 +8,38 @@ import useRadioButtonStyles from "./RadioButton.css";
 
 export interface RadioButtonProps
 	extends React.InputHTMLAttributes<HTMLInputElement> {
+	/**
+	 * The text that will be displayed adjacent to the radio, and will activate the radio when clicked.
+	 * @example
+	 * <RadioButton label="Item 1" />
+	 */
 	label?: string;
+	/**
+	 * A boolean to set the initial state or externally control the state of the radio.
+	 * @example
+	 * <RadioButton checked={true} />
+	 */
 	checked?: boolean;
+	/**
+	 * A callback function that is called when the radio is clicked.
+	 * @example
+	 * <RadioButton onChange={(event) => console.log("Radio clicked. Value now:", event.target.checked)} />
+	 */
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void | null;
+	/**
+	 * The color used from the current theme for the radio and the label text.
+	 * @default "primary"
+	 * @example
+	 * <RadioButton color="secondary">Secondary</RadioButton>
+	 */
 	color?: keyof Theme["colors"];
 }
-
+/**
+ * A basic radio button component.
+ * @example
+ * <RadioButton label="Item 1" color="secondary" checked={true} />
+ * <RadioButton label="Item 2" color="secondary" />
+ */
 const RadioButton: React.FC<RadioButtonProps> = ({
 	label = "",
 	checked = false,

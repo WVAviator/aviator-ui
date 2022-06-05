@@ -33,7 +33,7 @@ export const Controlled = () => {
 
 	return (
 		<div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-			<MenuIcon open={open} setOpen={setOpen} />
+			<MenuIcon open={open} onChange={setOpen} />
 			<p>{open ? "Opened Menu" : "Closed Menu"}</p>
 		</div>
 	);

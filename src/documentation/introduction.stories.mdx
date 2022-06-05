@@ -1,0 +1,80 @@
+import Button from "../components/Button";
+
+<Meta title="Introduction" />
+
+# AviatorUI
+
+AviatorUI is a simple, yet powerful, headless React component library. Benefit
+from fully-featured, accesible, and robust React components without being locked
+into the styling that other UI libraries force upon you.
+
+To get started, install the npm package:
+
+```
+npm install aviator-ui
+```
+
+or, if you're using Yarn:
+
+```
+yarn add aviator-ui
+```
+
+...and that's it - you're ready to go! Out of the box, you can start adding
+components to your app, and they'll render in the browser with the default
+styles. If you want to customize those styles, you can simply use the className
+prop on the components, just as you would for any other React component, and
+your styles will override the defaults.
+
+```javascript
+<>
+    <Button>Default Styles</Button>
+    <Button className="custom-btn">Custom Styles</Button>
+</>
+```
+```css
+.custom-btn {
+    background-color: #f00;
+    color: #fff;
+    font-size: 1.5rem;
+    border: none;
+}
+```
+
+<div style={{display: "flex", gap: "2rem", alignItems: "center"}}><Button>Default Styles</Button>
+<Button style={{backgroundColor: "#f00", color: "#FFF", fontSize: "1.5rem", border: "none"}}>Custom Styles</Button></div>
+
+This library will work with vanilla CSS, CSS modules, TailwindCSS, CSS-in-JS, or
+any other CSS framework you choose to use. Any styles you apply will
+automatically override the default AviatorUI styles.
+
+If you want to apply styling across all components, you can use the included
+Theme and ThemeProvider. Define your own custom Theme using the included
+createTheme() function...
+
+```javascript
+const theme = createTheme({
+        colors: {
+            primary: '#00ff99',
+            secondary: '#ff0099',
+        },
+    },
+});
+```
+
+...and pass the result to a ThemeProvider component that wraps your app.
+
+```javascript
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+	<React.StrictMode>
+        <ThemeProvider theme={theme}>
+		    <App />
+        </ThemeProvider>
+	</React.StrictMode>
+);
+```
+
+Any properties of the Theme object you define will override those properties on
+the default theme. For more information on which properties are available, see
+the Theme section of the documentation.

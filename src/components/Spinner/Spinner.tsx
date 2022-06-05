@@ -52,6 +52,11 @@ export interface SpinnerProps {
 	animationOptions?: Partial<SpinnerAnimationOptions>;
 }
 
+/**
+ * A loading spinner to represent a loading page, component, or process.
+ * @example
+ * <div>{isLoading && <Spinner size="medium" color="secondary" />}</div>
+ */
 const Spinner: React.FC<SpinnerProps> = ({
 	color = "primary",
 	size = "medium",
