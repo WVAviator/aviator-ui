@@ -7,12 +7,39 @@ import randomId from "../../utils/randomId";
 import useCheckboxStyles from "./Checkbox.css";
 
 export interface CheckboxProps extends React.HTMLAttributes<HTMLInputElement> {
+	/**
+	 * The text that will be displayed adjacent to the textbox, and will activate the checkbox when clicked.
+	 * @example
+	 * <Checkbox label="Item 1" />
+	 * <Checkbox label="Item 2" />
+	 */
 	label?: string;
+	/**
+	 * A boolean to set the initial state or externally control the state of the checkbox.
+	 * @example
+	 * <Checkbox checked={true} />
+	 */
 	checked?: boolean;
+	/**
+	 * A callback function that is called when the checkbox is clicked.
+	 * @example
+	 * <Checkbox onChange={(event) => console.log("Checkbox clicked. Value now:", event.target.checked)} />
+	 */
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void | null;
+	/**
+	 * The color used from the current theme for the checkbox and the label text.
+	 * @default "primary"
+	 * @example
+	 * <Checkbox color="secondary">Secondary</Checkbox>
+	 */
 	color?: keyof Theme["colors"];
 }
 
+/**
+ *
+ * @example
+ * <Checkbox label="Item Completed" color="secondary" />
+ */
 const Checkbox: React.FC<CheckboxProps> = ({
 	label = "",
 	checked = false,
