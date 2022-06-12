@@ -66,9 +66,9 @@ Sizes.args = {
 
 Variants.args = {
 	props: [
-		{ variant: "filled" },
-		{ variant: "outlined" },
-		{ variant: "ghost" },
+		{ variant: "filled", children: "Filled" },
+		{ variant: "outlined", children: "Outlined" },
+		{ variant: "ghost", children: "Ghost" },
 	],
 };
 

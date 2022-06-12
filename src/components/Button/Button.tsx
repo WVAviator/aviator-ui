@@ -37,6 +37,12 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 	 * @default "medium"
 	 */
 	size?: ButtonSize;
+	/**
+	 * An optional link that clicking the button will navigate to.
+	 * @example
+	 * <Button href="https://www.google.com">Google</Button>
+	 */
+	href?: string;
 }
 
 /**
@@ -50,18 +56,33 @@ const Button: React.FC<ButtonProps> = ({
 	endIcon = null,
 	startIcon = null,
 	size = "medium",
+	href,
 	children,
 	...rest
 }) => {
-	const { buttonStyles, iconStyles } = useButtonStyles(variant, color, size);
+	const { linkStyle, buttonStyles, iconStyles } = useButtonStyles(
+		variant,
+		color,
+		size
+	);
 
-	return (
+	const button = (
 		<button css={buttonStyles} {...rest}>
 			{startIcon && <span css={iconStyles}>{startIcon}</span>}
 			<span>{children}</span>
 			{endIcon && <span css={iconStyles}>{endIcon}</span>}
 		</button>
 	);
+
+	if (href) {
+		return (
+			<a css={linkStyle} href={href}>
+				{button}
+			</a>
+		);
+	}
+
+	return button;
 };
 
 export default Button;

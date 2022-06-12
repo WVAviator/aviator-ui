@@ -9,7 +9,7 @@ const useButtonStyles = (
 	color: keyof Theme["colors"],
 	size: ButtonSize
 ) => {
-	const { colors } = useTheme();
+	const { colors, font } = useTheme();
 
 	const fontSize = useMemo(() => {
 		switch (size) {
@@ -37,9 +37,16 @@ const useButtonStyles = (
 		}
 	}, [size]);
 
+	const linkStyle = useMemo(() => {
+		return css`
+			all: unset;
+		`;
+	}, []);
+
 	const baseStyle = useMemo(() => {
 		return css`
-			border: none;
+			all: unset;
+			font-family: ${font.family};
 			box-sizing: border-box;
 			padding: ${padding};
 			border-radius: 0.25rem;
@@ -119,7 +126,7 @@ const useButtonStyles = (
 		`;
 	}, []);
 
-	return { buttonStyles: [baseStyle, variantStyle], iconStyles };
+	return { linkStyle, buttonStyles: [baseStyle, variantStyle], iconStyles };
 };
 
 export default useButtonStyles;

@@ -13,5 +13,8 @@ declare module "@emotion/react" {
 			textLight: string;
 			textDark: string;
 		};
+		font: {
+			family: string;
+		};
 	}
 }
