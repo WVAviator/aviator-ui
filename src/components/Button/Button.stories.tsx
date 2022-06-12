@@ -38,20 +38,48 @@ const getIconPair = (startIcon: boolean, endIcon: boolean) => {
 	return [null, null];
 };
 
+type ButtonGroupProps = {
+	props: Partial<ButtonProps>[];
+};
+
+const MultiTemplate: Story<ButtonGroupProps> = (args) => {
+	const { props } = args;
+	return (
+		<div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+			{props.map((item, index) => (
+				<Button key={index} {...item} />
+			))}
+		</div>
+	);
+};
+
+export const Sizes = MultiTemplate.bind({});
+export const Variants = MultiTemplate.bind({});
+
+Sizes.args = {
+	props: [
+		{ size: "small", children: "Small", variant: "filled" },
+		{ size: "medium", children: "Medium", variant: "filled" },
+		{ size: "large", children: "Large", variant: "filled" },
+	],
+};
+
+Variants.args = {
+	props: [
+		{ variant: "filled" },
+		{ variant: "outlined" },
+		{ variant: "ghost" },
+	],
+};
+
 const Template: Story<ButtonProps> = ({ startIcon, endIcon, ...rest }) => {
 	const [start, end] = getIconPair(startIcon as boolean, endIcon as boolean);
 
 	return <Button startIcon={start} endIcon={end} {...rest} />;
 };
 
-export const Filled = Template.bind({});
-export const Outlined = Template.bind({});
-export const Ghost = Template.bind({});
 export const IconButton = Template.bind({});
 
-Filled.args = { variant: "filled", children: "Button" };
-Outlined.args = { variant: "outlined", children: "Button", color: "secondary" };
-Ghost.args = { variant: "ghost", children: "Button", color: "tertiary" };
 IconButton.args = {
 	variant: "filled",
 	children: "Button",

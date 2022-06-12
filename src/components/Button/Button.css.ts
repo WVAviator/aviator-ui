@@ -2,21 +2,48 @@ import { css, Theme } from "@emotion/react";
 import { useMemo } from "react";
 import { useTheme } from "../../theme";
 import { highestTextContrast, shadeColor } from "../../utils";
-import { ButtonVariants } from "./Button";
+import { ButtonSize, ButtonVariants } from "./Button";
 
 const useButtonStyles = (
 	variant: ButtonVariants,
-	color: keyof Theme["colors"]
+	color: keyof Theme["colors"],
+	size: ButtonSize
 ) => {
 	const { colors } = useTheme();
+
+	const fontSize = useMemo(() => {
+		switch (size) {
+			case "small":
+				return "0.8rem";
+			case "medium":
+				return "1rem";
+			case "large":
+				return "1.2rem";
+			default:
+				return "1rem";
+		}
+	}, [size]);
+
+	const padding = useMemo(() => {
+		switch (size) {
+			case "small":
+				return "0.5rem 1rem";
+			case "medium":
+				return "0.75rem 1.25rem";
+			case "large":
+				return "0.85rem 1.35rem";
+			default:
+				return "0.75rem 1.25rem";
+		}
+	}, [size]);
 
 	const baseStyle = useMemo(() => {
 		return css`
 			border: none;
 			box-sizing: border-box;
-			padding: 0.6em 1em;
+			padding: ${padding};
 			border-radius: 0.25rem;
-			font-size: 1rem;
+			font-size: ${fontSize};
 			font-weight: bold;
 			cursor: pointer;
 			transition: all 0.2s ease-in-out;
