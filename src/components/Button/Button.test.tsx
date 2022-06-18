@@ -42,4 +42,11 @@ describe("Button component", () => {
 		const button = screen.getByRole("button");
 		expect(button).toContainElement(screen.getByText("O"));
 	});
+
+	it("navigates to a page when an href is passed", async () => {
+		render(<Button href="https://www.google.com">Button</Button>);
+		const link = screen.getByRole("link");
+		expect(link).toHaveAttribute("href", "https://www.google.com");
+		expect(link).toContainElement(screen.getByText("Button"));
+	});
 });
