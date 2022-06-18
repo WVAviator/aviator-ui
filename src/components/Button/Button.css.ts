@@ -18,7 +18,7 @@ const useButtonStyles = (
 			case "medium":
 				return "1rem";
 			case "large":
-				return "1.2rem";
+				return "1.3rem";
 			default:
 				return "1rem";
 		}
@@ -31,7 +31,7 @@ const useButtonStyles = (
 			case "medium":
 				return "0.75rem 1.25rem";
 			case "large":
-				return "0.85rem 1.35rem";
+				return "0.8rem 1.4rem";
 			default:
 				return "0.75rem 1.25rem";
 		}
@@ -46,6 +46,9 @@ const useButtonStyles = (
 	const baseStyle = useMemo(() => {
 		return css`
 			all: unset;
+			& * {
+				box-sizing: border-box;
+			}
 			font-family: ${font.family};
 			box-sizing: border-box;
 			padding: ${padding};
@@ -59,6 +62,13 @@ const useButtonStyles = (
 			align-items: center;
 			justify-content: space-between;
 			gap: 0.5em;
+			position: relative;
+			isolation: isolate;
+			overflow: hidden;
+			& > span {
+				z-index: 3;
+				pointer-events: none;
+			}
 		`;
 	}, []);
 
@@ -73,12 +83,12 @@ const useButtonStyles = (
 					colors.textDark
 				)};
 				&:hover {
-					background-color: ${shadeColor(colors[color], -0.2)};
+					background-color: ${shadeColor(colors[color], -0.1)};
+					border: 2px solid ${shadeColor(colors[color], -0.1)};
 					box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
 				}
 				&:active {
 					box-shadow: 0px 0.2px 1px 1px rgba(0, 0, 0, 0.1);
-					transform: scale(95%);
 				}
 			`,
 			outlined: css`
@@ -86,17 +96,11 @@ const useButtonStyles = (
 				background-color: transparent;
 				color: ${colors[color]};
 				&:hover {
-					background-color: ${colors[color]};
-					color: ${highestTextContrast(
-						colors[color],
-						colors.textLight,
-						colors.textDark
-					)};
 					box-shadow: 0px 1.2px 1px 1px rgba(0, 0, 0, 0.1);
+					background-color: ${colors[color]}10;
 				}
 				&:active {
 					box-shadow: 0px 0.2px 1px 1px rgba(0, 0, 0, 0.1);
-					transform: scale(95%);
 				}
 			`,
 			ghost: css`
@@ -105,12 +109,7 @@ const useButtonStyles = (
 				box-shadow: none;
 				color: ${colors[color]};
 				&:hover {
-					background-color: ${colors[color]}60;
-					color: ${highestTextContrast(
-						colors[color],
-						colors.textLight,
-						colors.textDark
-					)};
+					background-color: ${colors[color]}30;
 				}
 				&:active {
 					transform: scale(95%);
@@ -126,7 +125,11 @@ const useButtonStyles = (
 		`;
 	}, []);
 
-	return { linkStyle, buttonStyles: [baseStyle, variantStyle], iconStyles };
+	return {
+		linkStyle,
+		buttonStyles: [baseStyle, variantStyle],
+		iconStyles,
+	};
 };
 
 export default useButtonStyles;
