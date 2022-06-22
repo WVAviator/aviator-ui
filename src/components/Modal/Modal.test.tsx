@@ -5,7 +5,7 @@ import "@testing-library/jest-dom";
 
 describe("Modal component", () => {
 	it("should render on the screen", () => {
-		render(<Modal />);
+		render(<Modal open={true}>Modal</Modal>);
 		const element = screen.getByText("Modal");
 		expect(element).toBeInTheDocument();
 	});
