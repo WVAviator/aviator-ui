@@ -19,8 +19,16 @@ const Template: Story<ModalProps> = (args) => {
 			<Button variant="ghost" onClick={() => setOpen(true)}>
 				Open Modal
 			</Button>
-			<Modal open={open} handleClose={() => setOpen(false)}>
+			<Modal
+				open={open}
+				handleClose={() => setOpen(false)}
+				style={{ minWidth: "18rem", minHeight: "18rem" }}
+			>
 				<h1>Hello world!</h1>
+				<p>This is a modal</p>
+				<Button variant="filled" onClick={() => setOpen(false)}>
+					Close
+				</Button>
 			</Modal>
 		</>
 	);

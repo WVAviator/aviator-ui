@@ -12,7 +12,10 @@ const useModalStyles = (color: keyof Theme["colors"]) => {
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background-color: #00000015;
+			backdrop-filter: blur(2px);
+			background-color: rgba(0, 0, 0, 0.4);
+			@supports not (backdrop-filter: blur(2px)) {
+			}
 		`;
 	}, [theme]);
 
@@ -22,9 +25,11 @@ const useModalStyles = (color: keyof Theme["colors"]) => {
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			min-width: 80%;
-			min-height: 80%;
+			box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+				rgba(0, 0, 0, 0.23) 0px 6px 6px;
 			background-color: ${theme.colors[color]};
+			border-radius: 0.25rem;
+			padding: 1rem;
 		`;
 	}, [theme, color]);
 
