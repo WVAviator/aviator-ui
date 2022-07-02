@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useEffect } from "react";
 import { Theme } from "@emotion/react";
 import useModalStyles from "./Modal.css";
+import ReactFocusLock from "react-focus-lock";
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
 	color?: keyof Theme["colors"];
 	open: boolean;
-	handleClose?: () => void;
+	handleClose: () => void;
 	children: React.ReactNode;
 	closeOnBackdropClick?: boolean;
 	backdropProps?: React.HTMLAttributes<HTMLDivElement>;
@@ -19,34 +20,44 @@ const Modal: React.FC<ModalProps> = ({
 	children,
 	closeOnBackdropClick = true,
 	backdropProps = {},
-	onClick,
 	...rest
 }) => {
+	useEffect(() => {
+		const handleEscapeKeyPressed = (event: KeyboardEvent) => {
+			if (event.key === "Escape" && open) {
+				handleClose && handleClose();
+			}
+		};
+		document.addEventListener("keydown", handleEscapeKeyPressed);
+		return () => {
+			document.removeEventListener("keydown", handleEscapeKeyPressed);
+		};
+	}, [open]);
+
 	const { backdropStyle, modalStyle } = useModalStyles(color);
 
 	if (!open) return null;
 
-	const processCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
+	const handleBackdropClick = () => {
 		if (closeOnBackdropClick) {
 			handleClose && handleClose();
 		}
-		backdropProps.onClick && backdropProps.onClick(e);
 	};
 
-	const processClickModal = (e: React.MouseEvent<HTMLDivElement>) => {
+	const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		e.stopPropagation();
-		onClick && onClick(e);
 	};
 
 	return (
 		<div
 			role="dialog"
+			aria-modal="true"
 			css={backdropStyle}
-			onClick={processCloseModal}
+			onClick={handleBackdropClick}
 			{...backdropProps}
 		>
-			<div css={modalStyle} onClick={processClickModal} {...rest}>
-				{children}
+			<div css={modalStyle} onClick={handleModalClick} {...rest}>
+				<ReactFocusLock returnFocus>{children}</ReactFocusLock>
 			</div>
 		</div>
 	);

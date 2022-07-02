@@ -104,7 +104,8 @@
 	},
 	"dependencies": {
 		"@babel/preset-react": "^7.17.12",
-		"@emotion/react": "^11.9.0"
+		"@emotion/react": "^11.9.0",
+		"react-focus-lock": "^2.9.1"
 	},
 	"repository": {
 		"type": "git",
