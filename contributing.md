@@ -7,6 +7,10 @@ If you're interested in helping build this UI library, I would love your help wi
 - Reporting any bugs or issues
 - Adding additionaly functionality (related to theming or otherwise)
 
+Please read and reference the instructions and guidelines below.
+
+## Instructions
+
 1. Please start by opening an Issue her on the repo with your suggestion.
 2. Fork the repo. Make sure to fork the _development_ branch, not the main branch.
 3. Create a new branch titled {your name}-{the component you're working on}
@@ -15,6 +19,8 @@ If you're interested in helping build this UI library, I would love your help wi
 6. Make your changes or build out your new components
 7. Commit your code
 8. Create a pull request to the development branch
+
+## Guidelines
 
 In regards to building a new component (or editing an existing component):
 
