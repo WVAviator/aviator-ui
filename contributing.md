@@ -11,7 +11,7 @@ Please read and reference the instructions and guidelines below.
 
 ## Instructions
 
-1. Please start by opening an Issue her on the repo with your suggestion.
+1. Please start by opening an Issue here on the repo with your suggestion.
 2. Fork the repo. Make sure to fork the _development_ branch, not the main branch.
 3. Create a new branch titled {your name}-{the component you're working on}
 4. Clone the repo to your local environment
